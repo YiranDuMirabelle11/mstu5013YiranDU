@@ -4,14 +4,14 @@
    <textarea name="name" rows="8" cols="48" placeholder="Content"></textarea>
    <div class="types">
      <select>
-       <option value="academic">academic</option>
-       <option value="funpost">funpost</option>
-       <option value="activity">activity</option>
+       <option value="1">academic</option>
+       <option value="2">funpost</option>
+       <option value="3">activity</option>
      </select>
    </div>
    <br>
    <button type="button">Post</button>
-   <button type="button">Cancel</button>
+   <button type="button" onclick = { parent.cancel } >Cancel</button>
  </div>
 
  <script>
