@@ -1,5 +1,5 @@
 <message>
-  <div class="message">
+  <div class="message" ref = "text">
     <p> {user} </p>
     <p> {content} </p>
     <span> {tag} </span>
@@ -8,9 +8,7 @@
 
  <script>
   var color = 300 - this.tag*50;
-  console.log(this.refs.message);
-
-
+  this.refs.text.style
 
 
 

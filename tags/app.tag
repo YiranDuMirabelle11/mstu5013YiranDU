@@ -1,9 +1,7 @@
 <app>
   <!-- This is the main tag -->
+  <div>  Hello <span class = "userinfo"> {user} </span> </div>
   <message each={ messagesList } ></message>
-
-
-
 
   <post if= { posting }></post>
 
@@ -11,7 +9,7 @@
 
   <script>
   var that = this;
-  this.user = "pear";
+  this.user = "Pear";
   this.messagesList = [{
       user: "apple",
       content: "I want a tutor",
@@ -49,6 +47,10 @@
     display: block;
     margin: 10px 10px 10px 10px;
   }
+
+   .userinfo {
+     margin-right: 10px;
+   }
 
   </style>
 
