@@ -27,9 +27,11 @@
       content: "I want to go to the cruise",
       tag: 3
     }];
-
     this.posting = false;
     console.log("ready")
+
+    var messagesRef = database.ref('/messages');
+    console.log(messagesRef);
 
     this.compose = function() {
       that.posting = true;
@@ -51,6 +53,7 @@
    .userinfo {
      margin-right: 10px;
    }
+
 
   </style>
 

@@ -11,23 +11,36 @@
 
 <body>
   <app></app>
-  <div class="footer-copyright py-3 text-center">
-        © 2018 Copyright by Yiran Du:
-    </div>
 </body>
 
 </html>
-<script>
-
-</script>
 
 <script src="tags/app.tag" type="riot/tag"></script>
 <script src="tags/message.tag" type="riot/tag"></script>
 <script src="tags/post.tag" type="riot/tag"></script>
 <script src="https://cdn.jsdelivr.net/riot/3.1/riot+compiler.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
 <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCvyqjgWVxFZ0vRyT8ba4Sg8p8gbi8m3I4",
+    authDomain: "summer2018-4b2a2.firebaseapp.com",
+    databaseURL: "https://summer2018-4b2a2.firebaseio.com",
+    projectId: "summer2018-4b2a2",
+    storageBucket: "summer2018-4b2a2.appspot.com",
+    messagingSenderId: "618110662056"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
  riot.mount('*');
 </script>
 
-</script>
+<style>
+ body {
+     background-color: #CFCCD6;
+     color: #595959;
+  }
+</style>

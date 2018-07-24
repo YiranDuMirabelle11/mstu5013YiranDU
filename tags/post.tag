@@ -40,7 +40,9 @@
    bottom: 30px;
    width: 400px;
    height: 300px;
+   background-color: tomato;
    }
+   
    textarea {
      margin-top: 10px;
    }
