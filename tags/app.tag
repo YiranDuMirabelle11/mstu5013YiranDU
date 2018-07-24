@@ -5,7 +5,7 @@
 
   <post if= { posting }></post>
 
-  <button type="button" name="button" onclick = { compose }>Compose</button>
+  <button type="button" class = "center" onclick = { compose }>Compose</button>
 
   <script>
   var that = this;

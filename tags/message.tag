@@ -8,7 +8,6 @@
 
  <script>
   var color = 300 - this.tag*50;
-  this.refs.text.style
 
 
 
