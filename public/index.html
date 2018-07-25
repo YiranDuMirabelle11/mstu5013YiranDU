@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lobster|Montserrat|Playfair+Display" rel="stylesheet">
+  <title>Who am I</title>
+</head>
+
+<body>
+  <app></app>
+</body>
+
+</html>
+
+<script src="tags/app.tag" type="riot/tag"></script>
+<script src="tags/message.tag" type="riot/tag"></script>
+<script src="tags/post.tag" type="riot/tag"></script>
+<script src="https://cdn.jsdelivr.net/riot/3.1/riot+compiler.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCvyqjgWVxFZ0vRyT8ba4Sg8p8gbi8m3I4",
+    authDomain: "summer2018-4b2a2.firebaseapp.com",
+    databaseURL: "https://summer2018-4b2a2.firebaseio.com",
+    projectId: "summer2018-4b2a2",
+    storageBucket: "summer2018-4b2a2.appspot.com",
+    messagingSenderId: "618110662056"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
+ riot.mount('*');
+</script>
+
+<style>
+ body {
+     background-color: #CFCCD6;
+     color: #595959;
+  }
+</style>
