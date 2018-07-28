@@ -1,15 +1,18 @@
 <app>
   <!-- This is the main tag -->
-  <div>  Hello <span class = "userinfo"> {user} </span> </div>
+  <div>  Hello <span class = "username"> {user} </span>!</div>
   <message each={ messagesList } ></message>
 
   <post if= { posting }></post>
 
   <button type="button" class = "center" onclick = { compose }>Compose</button>
+  <guess show={ guessing }></guess>
+
 
   <script>
   var that = this;
   this.user = "apple";
+  this.guessing = false;
   var messagesRef = database.ref("messages");
   messagesRef.on('value', function(snap) {
     var data = snap.val();
@@ -41,8 +44,10 @@
     margin: 10px 10px 10px 10px;
   }
 
-   .userinfo {
+   .username {
      margin-right: 10px;
+     color: blue;
+     font-size: 150%;
    }
 
 

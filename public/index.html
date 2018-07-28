@@ -18,6 +18,7 @@
 <script src="tags/app.tag" type="riot/tag"></script>
 <script src="tags/message.tag" type="riot/tag"></script>
 <script src="tags/post.tag" type="riot/tag"></script>
+<script src="tags/guess.tag" type="riot/tag"></script>
 <script src="https://cdn.jsdelivr.net/riot/3.1/riot+compiler.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
 <script>
@@ -33,6 +34,7 @@
   firebase.initializeApp(config);
 
   var database = firebase.database();
+  var observable = riot.observable();
 
  riot.mount('*');
 </script>
