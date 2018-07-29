@@ -12,7 +12,7 @@
 
 
   <!-- Logged In Page -->
-  <div if={ loggedin }>
+  <div class = "mainpage" if={ loggedin }>
     <div class="welcome">
       <span class = "welcometext">  Hello, <span class = "username"> {user} </span>!
     </span>
@@ -95,6 +95,10 @@
   .welcome {
     margin-left: 20px;
     margin-top: 10px;
+  }
+
+  .mainpage {
+    margin-bottom: 50px;
   }
 
   .welcometext {
