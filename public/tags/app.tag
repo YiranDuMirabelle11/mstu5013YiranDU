@@ -1,22 +1,20 @@
 <app>
   <!-- This is the main tag -->
-  <div if= { !loggedin }>
+  <div if= { !loggedin } class = "loginpage">
     <div class="loginwelcome">
       <h1>Hello!</h1>
       <div class=" logininfo">
         <span> Log in as <input type="text" value="" placeholder="nickname: e.g.apple" ref = "nickname" class = "nicknameinput"></span>
         <br><ion-icon name="arrow-round-forward" onclick = { login } class = "icon"></ion-icon>
       </div>
-
     </div>
-
   </div>
 
 
   <!-- Logged In Page -->
   <div if={ loggedin }>
-    <div class="rows">
-      <span class = "welcome">  Hello, <span class = "username"> {user} </span>!
+    <div class="welcome">
+      <span class = "welcometext">  Hello, <span class = "username"> {user} </span>!
     </span>
       <ion-icon name="log-out" onclick = { logout } class = "icon iconlogout"></ion-icon>
     </div>
@@ -50,6 +48,7 @@
     this.logout = function() {
       this.loggedin = false;
       this.user = "";
+      alert("You have logged out successfully!");
     };
 
 
@@ -79,7 +78,6 @@
   <style>
   :scope {
     display: block;
-    margin: 10px 10px 10px 10px;
     color: #765F77;
     font-size: 120%
   }
@@ -95,8 +93,12 @@
   }
 
   .welcome {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+
+  .welcometext {
     font-size: 200%;
-    margin-left: 5px;
   }
 
   .nicknameinput {
@@ -136,6 +138,12 @@
      width: auto;
      height: 50%;
      padding: 10px;
+   }
+
+   .loginpage {
+     background-color: #8DC8E8;
+     margin: 0 0 0 0;
+     padding-bottom:350px;
    }
 
   </style>

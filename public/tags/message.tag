@@ -16,7 +16,6 @@
 
   this.guess = function() {
     var userfakename = this.user;
-    console.log(userfakename);
     observable.trigger('guessactive', userfakename);
     this.parent.guessing = true;
     this.parent.update();
