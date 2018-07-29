@@ -1,30 +1,32 @@
 <app>
   <!-- This is the main tag -->
-  <div>  Hello <span class = "username"> {user} </span>!</div>
+  <div class = "welcome">  Hello, <span class = "username"> {user} </span>!
+  </div>
+
   <message each={ messagesList } ></message>
 
-  <post if= { posting }></post>
+  <post if= { posting } class="animated fadeInUp"></post>
 
-  <button type="button" class = "center" onclick = { compose }>Compose</button>
-  <guess show={ guessing }></guess>
+  <button type="button" class = "center composebtn" onclick = { compose }> Compose </button>
+  <guess show={ guessing } class ="animated fadeInUp"></guess>
 
 
   <script>
-  var that = this;
-  this.user = "apple";
-  this.guessing = false;
-  var messagesRef = database.ref("messages");
-  messagesRef.on('value', function(snap) {
-    var data = snap.val();
-    that.messagesList = [];
-    for (message in data) {
-      that.messagesList.push(data[message])
-    };
-    that.update();
-  });
-
+    var that = this;
+    this.user = "apple";
+    this.guessing = false;
     this.posting = false;
-    console.log("ready")
+
+    var messagesRef = database.ref("messages");
+
+    messagesRef.on('value', function(snap) {
+      var data = snap.val();
+      that.messagesList = [];
+      for (message in data) {
+        that.messagesList.push(data[message])
+      };
+      that.update();
+    });
 
 
     this.compose = function() {
@@ -42,15 +44,27 @@
   :scope {
     display: block;
     margin: 10px 10px 10px 10px;
+    color: #765F77;
+    font-size: 120%
   }
 
-   .username {
-     margin-right: 10px;
-     color: blue;
-     font-size: 150%;
+  .welcome {
+    font-size: 200%;
+  }
+
+  .username {
+     color: #93E2D0;
    }
 
-
+   .composebtn {
+     border-radius: 5px;
+     padding: 3px 8px 3px 8px;
+     margin-right: 5px;
+     background-color: #3379B7;
+     color: white;
+     border-color: none;
+     margin-left:48%;
+   }
   </style>
 
 

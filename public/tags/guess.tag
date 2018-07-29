@@ -4,7 +4,7 @@
       <h5 class="modal-title">So Your Guess!<h5>
     </div>
     <div class="modal-body">
-      <p>{ fakename } is</p>
+      <p><span> { fakename } </span>is</p>
       <input type="text" value="" placeholder = "Your guessing person">
     </div>
 
@@ -41,7 +41,7 @@
     :scope {
       background-color: white;
       position:fixed;
-      border: 1px solid #73AD21;
+      border: 1.5px solid #73AD21;
       border-radius: 3px;
       bottom: 50%;
       left: 35%;
@@ -55,10 +55,20 @@
     .btn-secondary {
       background-color: #6C747D;
       color: white;
+
     }
 
     input {
-      width: 80%
+      width: 100%
+    }
+
+    h5 {
+      font-size: 150%;
+    }
+
+    span {
+      color: #765F77;
+      font-family: 'Gloria Hallelujah', cursive;
     }
   </style>
 
