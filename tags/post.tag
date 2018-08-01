@@ -33,7 +33,14 @@
      }
        var messagesRef = database.ref('/messages');
        var newkey = messagesRef.push().key;
-       database.ref('/messages/' + newkey).set(postmessage);
+
+       var messagesPath = "messages/" + newkey;
+       var messagesByTopicPath = "messagesByTopic/" + this.refs.tag.value + "/" + newkey;
+       var updates = {};
+       updates[messagesPath] = postmessage;
+       updates[messagesByTopicPath] = postmessage;
+
+       database.ref().update(updates);
        that.parent.posting = false;
        that.parent.update();
    }

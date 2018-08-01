@@ -32,9 +32,16 @@
   <script>
     var that = this;
     this.loggedin = false;
-    this.user = "";
+    this.user = null;
     this.guessing = false;
     this.posting = false;
+
+    // this.googleauth = function() {
+    //   var provider = new firebase.auth.GoogleAuthProvider();
+    //   firebase.auth().signInWithPopup(provider).catch(function(err){
+    //     console.log(error);
+    //   });
+    // }
 
     this.login = function() {
       if (this.refs.nickname.value == "") {
