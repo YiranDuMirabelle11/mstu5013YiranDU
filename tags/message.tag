@@ -52,6 +52,7 @@
    .user {
     background-color: #FFD43A;
     margin-right: 8px;
+    padding-left: 10px;
     padding-top: 3px;
     padding-bottom: 3px;
     border-radius: 1px;
@@ -65,6 +66,11 @@
 
     .icon {
       font-size: 120%;
+    }
+
+    .user :hover {
+      font-weight: 1000;
+      text-decoration: underline;
     }
 
  </style>
