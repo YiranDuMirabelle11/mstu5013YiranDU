@@ -5,7 +5,7 @@
     </div>
     <div class="modal-body">
       <p><span> { fakename } </span>is</p>
-      <input type="text" value="" placeholder = "Your guessing person">
+      <input type="text" value="" placeholder = "Your guessing person" ref="guess">
     </div>
 
     <div class="modal-footer">
@@ -22,6 +22,7 @@
    this.close = function() {
      this.parent.guessing =false;
      this.parent.update();
+     this.refs.guess.value = "";
    };
 
    this.submit = function() {

@@ -54,6 +54,7 @@
 
     this.logout = function() {
       this.loggedin = false;
+      this.posting = false;
       this.user = "";
       alert("You have logged out successfully!");
     };
