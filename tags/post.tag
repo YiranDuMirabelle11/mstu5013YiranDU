@@ -4,9 +4,9 @@
    <textarea name="name" rows="6" cols="32" placeholder="Content" ref="text"></textarea>
    <div class="types">
      <select ref="tag">
-       <option value="1">academic</option>
-       <option value="2">funpost</option>
-       <option value="3">activity</option>
+       <option value="academic">academic</option>
+       <option value="funpost">funpost</option>
+       <option value="activity">activity</option>
      </select>
    </div>
    <div class="buttons">

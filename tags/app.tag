@@ -18,7 +18,16 @@
       <ion-icon name="log-out" onclick={ logout } class="icon iconlogout"></ion-icon>
     </div>
 
-    <message each={ messagesList } ></message>
+    <div class="filtergroup">
+      <select class="filter" ref={ filtertag } onchange={ tagfilter }>
+        <option value="">TAG</option>
+        <option value="activity">activity</option>
+        <option value="funpost">funpost</option>
+        <option value="academic">academic</option>
+      </select>
+    </div>
+
+    <message each={ messagesList }></message>
 
     <post if={ posting } class="animated fadeInUp"></post>
 
@@ -71,6 +80,11 @@
       that.update();
     });
 
+    this.tagfilter = function() {
+      var topic = that.refs.filtertag.value;
+      var messageTopicPath = "messagesByTopic/" + topic;
+    };
+
 
     this.compose = function() {
       that.posting = true;
@@ -101,12 +115,13 @@
     }
 
     .welcome {
-      margin-left: 20px;
       margin-top: 10px;
     }
 
     .mainpage {
       margin-bottom: 50px;
+      margin-left: 30px;
+      margin-right: 30px;
     }
 
     .welcometext {
@@ -156,6 +171,15 @@
        background-color: #8DC8E8;
        margin: 0 0 0 0;
        padding-bottom:350px;
+     }
+
+     .filtergroup {
+
+     }
+
+     .filter {
+       font-size: 90%;
+       margin-right: 0px;
      }
 
   </style>
