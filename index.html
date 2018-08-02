@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Lobster|Montserrat|Playfair+Display" rel="stylesheet">
-  <title>Who am I</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-</head>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Montserrat|Playfair+Display" rel="stylesheet">
+    <title>Who am I</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    </head>
 
-<body>
-  <app></app>
-</body>
+  <body>
+    <app></app>
+
+  <script src="tags/app.tag" type="riot/tag"></script>
+  <script src="tags/message.tag" type="riot/tag"></script>
+  <script src="tags/post.tag" type="riot/tag"></script>
+  <script src="tags/guess.tag" type="riot/tag"></script>
+  <script src="https://unpkg.com/ionicons@4.2.5/dist/ionicons.js"></script>
+  <script src="https://cdn.jsdelivr.net/riot/3.1/riot+compiler.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCvyqjgWVxFZ0vRyT8ba4Sg8p8gbi8m3I4",
+      authDomain: "summer2018-4b2a2.firebaseapp.com",
+      databaseURL: "https://summer2018-4b2a2.firebaseio.com",
+      projectId: "summer2018-4b2a2",
+      storageBucket: "summer2018-4b2a2.appspot.com",
+      messagingSenderId: "618110662056"
+    };
+    firebase.initializeApp(config);
+
+    var database = firebase.database();
+    var observable = riot.observable();
+
+   riot.mount('*');
+  </script>
+
+  <style>
+   body {
+     font-family: 'Open Sans', sans-serif;
+    }
+  </style>
+
+  </body>
 
 </html>
-
-<script src="tags/app.tag" type="riot/tag"></script>
-<script src="tags/message.tag" type="riot/tag"></script>
-<script src="tags/post.tag" type="riot/tag"></script>
-<script src="tags/guess.tag" type="riot/tag"></script>
-<script src="https://unpkg.com/ionicons@4.2.5/dist/ionicons.js"></script>
-<script src="https://cdn.jsdelivr.net/riot/3.1/riot+compiler.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCvyqjgWVxFZ0vRyT8ba4Sg8p8gbi8m3I4",
-    authDomain: "summer2018-4b2a2.firebaseapp.com",
-    databaseURL: "https://summer2018-4b2a2.firebaseio.com",
-    projectId: "summer2018-4b2a2",
-    storageBucket: "summer2018-4b2a2.appspot.com",
-    messagingSenderId: "618110662056"
-  };
-  firebase.initializeApp(config);
-
-  var database = firebase.database();
-  var observable = riot.observable();
-
- riot.mount('*');
-</script>
-
-<style>
- body {
-   font-family: 'Open Sans', sans-serif;
-  }
-</style>

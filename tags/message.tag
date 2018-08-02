@@ -5,7 +5,7 @@
        <span onclick={ guess }> {user} </span>
       </div>
       <div class="row">
-        <p> <ion-icon name="finger-print" class = "icon" if = {tag == 2}></ion-icon><ion-icon name="wine" class = "icon" if={ tag == 3 }></ion-icon><ion-icon name="book" class = "icon" if={ tag == 1 }></ion-icon> {content} </p>
+        <p> <ion-icon name="finger-print" class="icon" if={tag == 2}></ion-icon><ion-icon name="wine" class = "icon" if={ tag==3 }></ion-icon><ion-icon name="book" class = "icon" if={ tag==1 }></ion-icon> {content} </p>
       </div>
     </div>
 

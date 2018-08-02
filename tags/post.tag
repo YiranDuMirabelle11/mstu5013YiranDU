@@ -1,17 +1,17 @@
 <post>
 
  <div class="postingarea">
-   <textarea name="name" rows="6" cols="32" placeholder="Content" ref = "text"></textarea>
+   <textarea name="name" rows="6" cols="32" placeholder="Content" ref="text"></textarea>
    <div class="types">
-     <select ref = "tag">
+     <select ref="tag">
        <option value="1">academic</option>
        <option value="2">funpost</option>
        <option value="3">activity</option>
      </select>
    </div>
    <div class="buttons">
-     <button type="button" onclick= { post } class = "post button">Post</button>
-     <button type="button" onclick = { parent.cancel } class = "cancel button">Cancel</button>
+     <button type="button" onclick={ post } class = "post button">Post</button>
+     <button type="button" onclick={ parent.cancel } class = "cancel button">Cancel</button>
    </div>
 
  </div>

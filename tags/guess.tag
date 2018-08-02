@@ -5,12 +5,12 @@
     </div>
     <div class="modal-body">
       <p><span> { fakename } </span>is</p>
-      <input type="text" value="" placeholder = "Your guessing person" ref="guess">
+      <input type="text" value="" placeholder="Your guessing person" ref="guess">
     </div>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" onclick = { close } > Close </button>
-      <button type="button" class="btn btn-primary" onclick = { submit } > Submit </button>
+      <button type="button" class="btn btn-secondary" onclick={ close } > Close </button>
+      <button type="button" class="btn btn-primary" onclick={ submit } > Submit </button>
     </div>
   </div>
 
