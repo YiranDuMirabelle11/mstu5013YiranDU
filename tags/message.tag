@@ -1,8 +1,8 @@
-<message >
+<message>
   <div class="tag-{ tag }" ref = "text">
     <div class="text row">
       <div class="user col-sm-1" >
-       <span onclick={ guess }> {user} </span>
+       <span onclick={ dig }> {user} </span>
       </div>
       <div class="row">
         <p> <ion-icon name="finger-print" class="icon" if={ tag=="funpost"}></ion-icon><ion-icon name="wine" class = "icon" if={ tag=="activity" }></ion-icon><ion-icon name="book" class = "icon" if={ tag=="academic" }></ion-icon> {content} </p>
@@ -14,10 +14,9 @@
  <script>
   var that = this;
 
-  this.guess = function() {
-    var userfakename = this.user;
-    observable.trigger('guessactive', userfakename);
-    this.parent.guessing = true;
+  this.dig = function() {
+    this.parent.digging = true;
+    this.parent.diguser = this.user;
     this.parent.update();
   };
 

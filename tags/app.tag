@@ -1,6 +1,6 @@
 <app>
   <!-- This is the main tag -->
-  <div if={ !loggedin } class="loginpage">
+  <div if={ !loggedin && !digging } class="loginpage">
     <div class="loginwelcome">
       <h1>Hello!</h1>
       <div class="logininfo">
@@ -12,7 +12,7 @@
 
 
   <!-- Logged In Page -->
-  <div class="mainpage" if={ loggedin }>
+  <div class="mainpage" show={ loggedin && !digging }>
     <div class="welcome">
       <span class="welcometext">  Hello, <span class="username"> {user} </span>!</span>
       <ion-icon name="log-out" onclick={ logout } class="icon iconlogout"></ion-icon>
@@ -33,10 +33,11 @@
 
     <button type="button" class="center composebtn" onclick={ compose }> Compose </button>
 
-    <guess show={ guessing } class ="animated fadeInUp"></guess>
   </div>
 
 
+  <individual if={ digging } user={ diguser }></individual>
+  <guess show={ guessing } class ="animated fadeInUp"></guess>
 
   <script>
     var that = this;
@@ -44,6 +45,8 @@
     this.user = null;
     this.guessing = false;
     this.posting = false;
+    this.digging = false;
+    this.diguser = "";
 
     // this.googleauth = function() {
     //   var provider = new firebase.auth.GoogleAuthProvider();
