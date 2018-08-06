@@ -1,27 +1,40 @@
 <message>
-  <div class="tag-{ tag }" ref="text">
-    <div class="text row">
-      <div class="user col-sm-1" >
-       <span onclick={ dig }> {user} </span>
+    <div class="tag-{ tag }" ref="text">
+      <div class="text row">
+        <div class="user col-sm-1" >
+         <span onclick={ dig }> {user} </span>
+        </div>
+        <div class="content">
+          <p> <ion-icon name="finger-print" class="icon" if={ tag=="funpost"}></ion-icon><ion-icon name="wine" class = "icon" if={ tag=="activity" }></ion-icon><ion-icon name="book" class = "icon" if={ tag=="academic" }></ion-icon> {content} </p>
+        </div>
+        <div show={ owner } class="editform" id="edit">
+          <span class="editspan" onclick={ edit }> Edit </span>
+          <span class="editspan" onclick={ delete }> Delete </span>
+        </div>
+
       </div>
-      <div class="row">
-        <p> <ion-icon name="finger-print" class="icon" if={ tag=="funpost"}></ion-icon><ion-icon name="wine" class = "icon" if={ tag=="activity" }></ion-icon><ion-icon name="book" class = "icon" if={ tag=="academic" }></ion-icon> {content} </p>
-      </div>
-      <div class="editform" id="edit">
-        <button type="button" class="btn btnedit">edit</button>
-        <button type="button" class="btn btndelt">delete</button>
-      </div>
-    </div>
+
+
 
 
 
  <script>
   var that = this;
-  // if (this.parent.user === this.user) {
-  //   that.owner = true;
-  // } else {
-  //   that.owner = false;
-  // };
+  this.on('update', function() {
+    if (this.parent.user === this.user) {
+        that.owner = true;
+      } else {
+        that.owner = false;
+      };
+      console.log(that.owner);
+      console.log(this.parent.user);
+      console.log(this.user);
+  });
+
+
+  this.edit = function() {
+    console.log(this.user);
+  };
 
   this.dig = function() {
     this.parent.digging = true;
@@ -81,14 +94,24 @@
       text-decoration: underline;
     }
 
+    .content {
+      margin-bottom: 20px;
+    }
+
+    .editspan {
+      font-size: 80%;
+      margin-right: 20px;
+    }
+
     .text:hover #edit {
       display:block;
+      margin-top: -20px;
     }
 
     .text #edit {
       display: none;
       width: 250px;
-      height: 30px;
+      height: 20px;
     }
 
     #edit {

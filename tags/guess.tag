@@ -56,7 +56,6 @@
     .btn-secondary {
       background-color: #6C747D;
       color: white;
-
     }
 
     input {
