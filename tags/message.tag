@@ -26,13 +26,17 @@
       } else {
         that.owner = false;
       };
-      console.log(that.owner);
-      console.log(this.parent.user);
-      console.log(this.user);
+      // console.log(that.owner);
+      // console.log(this.parent.user);
+      // console.log(this.user);
   });
 
 
   this.edit = function() {
+    console.log(this.user);
+  };
+
+  this.delete = function() {
     console.log(this.user);
   };
 
