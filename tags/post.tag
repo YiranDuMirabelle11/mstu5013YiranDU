@@ -26,6 +26,11 @@
        content: this.refs.text.value,
        tag: this.refs.tag.value
      };
+
+     var post = {
+       content: this.refs.text.value,
+       tag: this.refs.tag.value
+     };
      if (this.refs.text.value === "") {
        alert("Please type in your message content!");
        e.preventUpdate = true;
@@ -36,9 +41,12 @@
 
        var messagesPath = "messages/" + newkey;
        var messagesByTopicPath = "messagesByTopic/" + this.refs.tag.value + "/" + newkey;
+       var postByUserPath = "usersProfile/" + this.parent.user + "/" + this.refs.tag.value;
+       var messageByUserPath = "messagesByUser/" + this.parent.user + "/" + newkey;
        var updates = {};
        updates[messagesPath] = postmessage;
        updates[messagesByTopicPath] = postmessage;
+       updates[messageByUserPath] = post;
 
        database.ref().update(updates);
        that.parent.posting = false;

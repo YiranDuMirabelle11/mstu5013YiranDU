@@ -4,7 +4,7 @@
     <div class="loginwelcome">
       <h1>Hello!</h1>
       <div class="logininfo">
-        <span> Log in as <input type="text" value="" placeholder="nickname: e.g.apple" ref="nickname" class="nicknameinput"></span>
+        <span> Log in as <input type="text" value="" placeholder="nickname: e.g.apple" ref="nickname" class="nicknameinput" onkeypress={ login }></span>
         <br><ion-icon name="arrow-round-forward" onclick={ login } class="icon"></ion-icon>
       </div>
     </div>
@@ -55,13 +55,15 @@
     //   });
     // }
 
-    this.login = function() {
-      if (this.refs.nickname.value == "") {
-        alert("Please type in the nickname");
-        return false;
+    this.login = function(e) {
+      if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+        if (this.refs.nickname.value == "") {
+          alert("Please type in the nickname");
+          return false;
+        }
+        this.user = this.refs.nickname.value;
+        this.loggedin = true;
       }
-      this.user = this.refs.nickname.value;
-      this.loggedin = true;
     };
 
     this.logout = function() {

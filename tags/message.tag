@@ -1,7 +1,7 @@
 <message>
     <div class="tag-{ tag }" ref="text">
       <div class="text row">
-        <div class="user col-sm-1" >
+        <div class="user col-sm-1" if={ user }>
          <span onclick={ dig }> {user} </span>
         </div>
         <div class="content">
@@ -32,12 +32,13 @@
   });
 
 
-  this.edit = function() {
-    console.log(this.user);
+  this.edit = function(e) {
+    var message = event.item;
   };
 
-  this.delete = function() {
-    console.log(this.user);
+  this.delete = function(e) {
+    var message = event.item;
+    console.log(message.id);
   };
 
   this.dig = function() {
