@@ -1,18 +1,28 @@
 <message>
+  <div class="">
     <div class="tag-{ tag }" ref="text">
       <div class="text row">
         <div class="user col-sm-1" if={ user }>
          <span onclick={ dig }> {user} </span>
         </div>
         <div class="content">
-          <p> <ion-icon name="finger-print" class="icon" if={ tag=="funpost"}></ion-icon><ion-icon name="wine" class = "icon" if={ tag=="activity" }></ion-icon><ion-icon name="book" class = "icon" if={ tag=="academic" }></ion-icon> {content} </p>
+          <div class="editarea" show={ editing }>
+            <textarea ref="edittext"></textarea>
+            <br>
+            <button type="button" class = "btn cancel" onclick={ canceledit }>Cancel</button>
+            <button type="button"class = "btn post" onclick={ editpost }>Post</button>
+          </div>
+          <p show={ !editing }> <ion-icon name="finger-print" class="icon" if={ tag=="funpost"}></ion-icon><ion-icon name="wine" class = "icon" if={ tag=="activity" }></ion-icon><ion-icon name="book" class = "icon" if={ tag=="academic" }></ion-icon> {content} </p>
         </div>
-        <div show={ owner } class="editform" id="edit">
+        <div show={ owner && !editing } class="editform" id="edit">
           <span class="editspan" onclick={ edit }> Edit </span>
           <span class="editspan" onclick={ delete }> Delete </span>
         </div>
-
       </div>
+   </div>
+
+
+  </div>
 
 
 
@@ -20,6 +30,7 @@
 
  <script>
   var that = this;
+  this.editing = false;
   this.on('update', function() {
     if (this.parent.user === this.user) {
         that.owner = true;
@@ -34,11 +45,39 @@
 
   this.edit = function(e) {
     var message = event.item;
+    this.editing =true;
+    that.refs.edittext.value = this.content;
   };
+
+  this.canceledit = function() {
+    this.editing = false;
+  }
 
   this.delete = function(e) {
     var message = event.item;
     console.log(message.id);
+    var messagePath = "messages/" + message.id;
+    var messagesByTopicPath = "messagesByTopic/" + message.tag + "/" + message.id;
+    var messagesByUserPath = "messagesByUser/" + message.user + "/" + message.id;
+    var updates = {};
+    updates[messagePath] = null;
+    updates[messagesByTopicPath] = null;
+    updates[messagesByUserPath] = null;
+    database.ref().update(updates);
+    this.parent.update();
+  };
+
+  this.editpost = function(e) {
+    var message = event.item;
+    var messagePath = "messages/" + message.id + "/content";
+    var messagesByTopicPath = "messagesByTopic/" + message.tag + "/" + message.id + "/content";
+    var messagesByUserPath = "messagesByUser/" + message.user + "/" + message.id + "/content";
+    var updates = {};
+    updates[messagePath] = that.refs.edittext.value;
+    updates[messagesByTopicPath] = that.refs.edittext.value;
+    updates[messagesByUserPath] = that.refs.edittext.value;
+    database.ref().update(updates);
+    this.parent.update();
   };
 
   this.dig = function() {
@@ -122,6 +161,35 @@
     #edit {
       margin-left: 20px;
       opacity: 0.7;
+    }
+
+    .editarea {
+      width: 100%;
+      margin-bottom: -25px;
+      margin-left: 8%;
+      margin-top: 10px;
+    }
+
+    textarea {
+      width: 85%;
+      height: 70%;
+    }
+
+    .btn {
+      padding: 3px 5px;
+      margin-right: 20px;
+    }
+
+    .cancel {
+      background-color: #6C747D;
+      color: white;
+      border-color: none;
+    }
+
+    .post {
+      background-color: #3379B7;
+      color: white;
+      border-color: none;
     }
 
  </style>

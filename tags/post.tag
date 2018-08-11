@@ -38,6 +38,8 @@
      }
        var messagesRef = database.ref('/messages');
        var newkey = messagesRef.push().key;
+       post.id = newkey;
+       postmessage.id = newkey;
 
        var messagesPath = "messages/" + newkey;
        var messagesByTopicPath = "messagesByTopic/" + this.refs.tag.value + "/" + newkey;
