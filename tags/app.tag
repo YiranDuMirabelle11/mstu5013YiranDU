@@ -19,7 +19,7 @@
     </div>
 
     <div class="filtergroup">
-      <select class="filter" ref={ filtertag } onchange={ tagfilter }>
+      <select class="filter" ref="filtertag" onchange={ tagfilter }>
         <option value="">TAG</option>
         <option value="activity">activity</option>
         <option value="funpost">funpost</option>
@@ -47,6 +47,7 @@
     this.posting = false;
     this.digging = false;
     this.diguser = "";
+    this.messagesList = [];
 
     // this.googleauth = function() {
     //   var provider = new firebase.auth.GoogleAuthProvider();
@@ -76,18 +77,33 @@
 
     var messagesRef = database.ref("messages");
 
-    messagesRef.on('value', function(snap) {
+    messagesRef.once('value', function(snap) {
       var data = snap.val();
-      that.messagesList = [];
+      that.messagesTotalList = [];
       for (message in data) {
-        that.messagesList.push(data[message])
+        that.messagesTotalList.push(data[message])
       };
+      that.messagesList = that.messagesTotalList;
+      console.log(that.messagesList);
       that.update();
     });
 
     this.tagfilter = function() {
       var topic = that.refs.filtertag.value;
-      var messageTopicPath = "messagesByTopic/" + topic;
+      if (topic !== "") {
+        var messageTopicPath = "messagesByTopic/" + topic;
+        var messageTopicRef = database.ref(messageTopicPath);
+        messageTopicRef.once('value', function(snap) {
+          var data = snap.val();
+          var topicMessages = Object.values(data);
+          console.log(topicMessages);
+          that.messagesList = topicMessages;
+          that.update();
+        });
+        // that.messageList = topicMessages;
+      } else {
+        that.messagesList = that.messagesTotalList;
+      };
     };
 
 
