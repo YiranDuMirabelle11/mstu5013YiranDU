@@ -73,11 +73,14 @@
     var messagesByTopicPath = "messagesByTopic/" + message.tag + "/" + message.id + "/content";
     var messagesByUserPath = "messagesByUser/" + message.user + "/" + message.id + "/content";
     var updates = {};
-    updates[messagePath] = that.refs.edittext.value;
-    updates[messagesByTopicPath] = that.refs.edittext.value;
-    updates[messagesByUserPath] = that.refs.edittext.value;
+    var newContent = that.refs.edittext.value;
+    console.log(newContent);
+    updates[messagePath] = newContent;
+    updates[messagesByTopicPath] = newContent;
+    updates[messagesByUserPath] = newContent;
     database.ref().update(updates);
-    this.parent.update();
+    that.editing = false;
+    that.parent.update();
   };
 
   this.dig = function() {

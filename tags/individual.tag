@@ -2,9 +2,11 @@
   <div class="container">
     <h1 onclick={ guess }>{ user }</h1>
     <div class="row info">
+      <!-- Chart -->
       <div class="col-md-6">
-          <canvas id="myPieChart"></canvas>
+          <canvas ref="myPieChart"></canvas>
       </div>
+      <!-- Message List -->
       <div class="col-md-6 usermessages">
        <message each={ currentUserMessages }></message>
       </div>
@@ -21,7 +23,15 @@
   <script>
     var that = this;
     this.user = this.opts.user;
-    var messagesOfTargetUserRef = database.ref("messagesByUser/"+this.user)
+      var messagesOfTargetUserRef = database.ref("messagesByUser/"+this.user);
+     // messagesOfTargetUserRef.orderByChild('tag').equalTo('academic').once('value', function(snap) {
+     //                    var data = snap.val();
+     //                    this.numOfAcademic Object.keys(data).length;
+     //                  });
+     // messagesOfTargetUserRef.orderByChild('tag').equalTo('activity').once('value', function(snap) {
+     //                    var data = snap.val();
+     //                    this.numOfActivity = Object.keys(data).length;
+     //                  });
 
     this.guess = function() {
       var userfakename = this.user;
@@ -30,10 +40,22 @@
       this.parent.update();
     };
 
-    this.on('mount', function() {
+    this.on('update', function() {
       console.log("graphs");
-      var ctx = document.getElementById("myPieChart");
-      var userdata = [10, 20, 30];
+      var ctx = this.refs.myPieChart;
+      messagesOfTargetUserRef.orderByChild('tag').equalTo('funpost').on('value', function(snap){
+        var data = snap.val();
+        that.numOfFunpost = Object.keys(data).length;
+        });
+      messagesOfTargetUserRef.orderByChild('tag').equalTo('academic').on('value', function(snap){
+        var data = snap.val();
+        that.numOfAcademic = Object.keys(data).length;
+        });
+      messagesOfTargetUserRef.orderByChild('tag').equalTo('activity').on('value', function(snap){
+        var data = snap.val();
+        that.numOfActivity = Object.keys(data).length;
+        });
+      var userdata = [that.numOfAcademic, that.numOfFunpost, that.numOfActivity];
       var myPieChart = new Chart(ctx,{
           type: 'doughnut',
           data: {
@@ -58,6 +80,7 @@
           options: {}
         });
       });
+
 
       this.mainpage = function() {
         console.log("Go back to the main page");

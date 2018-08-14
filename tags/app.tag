@@ -77,7 +77,7 @@
 
     var messagesRef = database.ref("messages");
 
-    messagesRef.once('value', function(snap) {
+    messagesRef.on('value', function(snap) {
       var data = snap.val();
       that.messagesTotalList = [];
       for (message in data) {
