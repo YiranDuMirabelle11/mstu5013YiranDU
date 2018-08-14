@@ -13,7 +13,6 @@
      <button type="button" onclick={ post } class = "post button">Post</button>
      <button type="button" onclick={ parent.cancel } class = "cancel button">Cancel</button>
    </div>
-
  </div>
 
  <script>
@@ -53,7 +52,8 @@
        database.ref().update(updates);
        that.parent.posting = false;
        that.parent.update();
-   }
+   };
+
  </script>
 
  <style>

@@ -55,26 +55,39 @@
         var data = snap.val();
         that.numOfActivity = Object.keys(data).length;
         });
-      var userdata = [that.numOfAcademic, that.numOfFunpost, that.numOfActivity];
+      if (that.numOfAcademic == "") {
+        that.numOfAcademic == 0;
+      };
+      if (that.numOfFunpost == "") {
+        that.numOfFunpost == 0;
+      };
+      if (that.numOfActivity == "") {
+        that.numOfActivity == 0;
+      };
+      var userdata = [ that.numOfAcademic, that.numOfFunpost, that.numOfActivity];
+      var acaindex = that.numOfAcademic/(that.numOfAcademic+ that.numOfFunpost+that.numOfActivity)
+      var funindex = that.numOfFunpost/(that.numOfAcademic+ that.numOfFunpost+that.numOfActivity)
+      var acadeindex = that.numOfActivity/(that.numOfAcademic+ that.numOfFunpost+that.numOfActivity)
+      console.log(acaindex, funindex, acadeindex);
       var myPieChart = new Chart(ctx,{
           type: 'doughnut',
           data: {
             datasets: [{
                 data: userdata,
                 backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)'
+                  `rgba(255, 0, 0, ${acadeindex})`,
+                  `rgba(0, 255, 0, ${funindex})`,
+                  `rgba(0, 0, 255, ${acaindex})`
                 ],
-            }],
+              }],
 
             // These labels appear in the legend and in the tooltips when hovering different arcs
             labels: [
                 'academic',
                 'fun post',
                 'activity'
-            ]
-          },
+                ]
+              },
 
                 // These labels appear in the legend and in the tooltips when hovering different arcs
           options: {}
