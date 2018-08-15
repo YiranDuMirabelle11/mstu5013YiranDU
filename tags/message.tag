@@ -78,7 +78,7 @@
     updates[messagesByUserPath] = newContent;
     database.ref().update(updates);
     that.editing = false;
-    that.parent.update();
+    // that.parent.update();
   };
 
   this.dig = function() {

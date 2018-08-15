@@ -53,6 +53,7 @@
         });
       messagesOfTargetUserRef.orderByChild('tag').equalTo('activity').on('value', function(snap){
         var data = snap.val();
+        console.log("here");
         that.numOfActivity = Object.keys(data).length;
         });
       if (that.numOfAcademic == "") {
@@ -64,6 +65,7 @@
       if (that.numOfActivity == "") {
         that.numOfActivity == 0;
       };
+      console.log("there");
       var userdata = [ that.numOfAcademic, that.numOfFunpost, that.numOfActivity];
       var acaindex = that.numOfAcademic/(that.numOfAcademic+ that.numOfFunpost+that.numOfActivity)
       var funindex = that.numOfFunpost/(that.numOfAcademic+ that.numOfFunpost+that.numOfActivity)
