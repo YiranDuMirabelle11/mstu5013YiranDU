@@ -41,6 +41,8 @@
 
   <script>
     var that = this;
+
+    // Initualize
     this.loggedin = false;
     this.user = null;
     this.guessing = false;
@@ -49,32 +51,7 @@
     this.diguser = "";
     this.messagesList = [];
 
-    // this.googleauth = function() {
-    //   var provider = new firebase.auth.GoogleAuthProvider();
-    //   firebase.auth().signInWithPopup(provider).catch(function(err){
-    //     console.log(error);
-    //   });
-    // }
-
-    this.login = function(e) {
-      if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
-        if (this.refs.nickname.value == "") {
-          alert("Please type in the nickname");
-          return false;
-        }
-        this.user = this.refs.nickname.value;
-        this.loggedin = true;
-      }
-    };
-
-    this.logout = function() {
-      this.loggedin = false;
-      this.posting = false;
-      this.user = "";
-      alert("You have logged out successfully!");
-    };
-
-
+    // Firebase setup
     var messagesRef = database.ref("messages");
 
     messagesRef.on('value', function(snap) {
@@ -88,6 +65,34 @@
       that.update();
     });
 
+    // this.googleauth = function() {
+    //   var provider = new firebase.auth.GoogleAuthProvider();
+    //   firebase.auth().signInWithPopup(provider).catch(function(err){
+    //     console.log(error);
+    //   });
+    // }
+
+    //Login Page
+    this.login = function(e) {
+      if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+        if (this.refs.nickname.value == "") {
+          alert("Please type in the nickname");
+          return false;
+        }
+        this.user = this.refs.nickname.value;
+        this.loggedin = true;
+      }
+    };
+
+    //Log out
+    this.logout = function() {
+      this.loggedin = false;
+      this.posting = false;
+      this.user = "";
+      alert("You have logged out successfully!");
+    };
+
+    // Filter Messages
     this.tagfilter = function() {
       var topic = that.refs.filtertag.value;
       if (topic !== "") {
@@ -106,15 +111,16 @@
       };
     };
 
-
+    // Compose button
     this.compose = function() {
       that.posting = true;
-    }
+    };
 
+    // Cancel post
     this.cancel = function() {
       that.posting = false;
       that.update();
-    }
+    };
   </script>
 
 
@@ -154,53 +160,53 @@
     }
 
     .username {
-       color: #93E2D0;
+      color: #93E2D0;
+    }
+
+    .composebtn {
+      border-radius: 5px;
+      padding: 3px 8px 3px 8px;
+      margin-right: 5px;
+      background-color: #3379B7;
+      color: white;
+      border-color: none;
+      margin-left:48%;
+    }
+
+    .icon {
+      /* background-color: #C9D7F8; */
+      font-size: 150%;
+      margin-top: 10px;
+      padding: 3px 3px 3px 3px;
      }
 
-     .composebtn {
-       border-radius: 5px;
-       padding: 3px 8px 3px 8px;
-       margin-right: 5px;
-       background-color: #3379B7;
-       color: white;
-       border-color: none;
-       margin-left:48%;
+    .iconlogout {
+      position: fixed;
+      right: 10px;
+      top: 5px;
      }
 
-     .icon {
-       /* background-color: #C9D7F8; */
-       font-size: 150%;
-       margin-top: 10px;
-       padding: 3px 3px 3px 3px;
+    .logininfo {
+      text-align: center;
+      margin: auto;
+      width: auto;
+      height: 50%;
+      padding: 10px;
      }
 
-     .iconlogout {
-       position: fixed;
-       right: 10px;
-       top: 5px;
+    .loginpage {
+      background-color: #8DC8E8;
+      margin: 0 0 0 0;
+      padding-bottom:350px;
      }
 
-     .logininfo {
-       text-align: center;
-       margin: auto;
-       width: auto;
-       height: 50%;
-       padding: 10px;
-     }
-
-     .loginpage {
-       background-color: #8DC8E8;
-       margin: 0 0 0 0;
-       padding-bottom:350px;
-     }
-
-     .filtergroup {
+    .filtergroup {
 
      }
 
-     .filter {
-       font-size: 90%;
-       margin-right: 0px;
+    .filter {
+      font-size: 90%;
+      margin-right: 0px;
      }
 
   </style>
