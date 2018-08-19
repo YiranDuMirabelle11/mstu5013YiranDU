@@ -48,13 +48,13 @@
       }).length;
 
       if (numOfAcademic == "") {
-        that.numOfAcademic == 0;
+        numOfAcademic == 0;
       };
       if (numOfFunpost == "") {
-        that.numOfFunpost == 0;
+        numOfFunpost == 0;
       };
       if (numOfActivity == "") {
-        that.numOfActivity == 0;
+        numOfActivity == 0;
       };
       console.log("there");
       var userdata = [ numOfAcademic, numOfFunpost, numOfActivity];

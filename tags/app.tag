@@ -1,11 +1,30 @@
 <app>
   <!-- This is the main tag -->
   <div if={ !loggedin && !digging } class="loginpage">
+      <!-- This is the fakename -->
     <div class="loginwelcome">
       <h1>Hello!</h1>
-      <div class="logininfo">
-        <span> Log in as <input type="text" value="" placeholder="nickname: e.g.apple" ref="nickname" class="nicknameinput" onkeypress={ login }></span>
-        <br><ion-icon name="arrow-round-forward" onclick={ login } class="icon"></ion-icon>
+      <div class="logininfo" if={ !user }>
+        <span> Log in as <input type="text" placeholder="nickname: e.g.apple" ref="nickname" class="nicknameinput" onkeypress={ login }></span>
+        <br><ion-icon name="arrow-round-forward" onclick={ loginFakeName } class="icon"></ion-icon>
+      </div>
+    <!-- This is the second login -->
+      <div if={ user }>
+        <!-- This is the realname -->
+        <div class="logininfo" if={ !userLogged }>
+          <div class="marginTop">
+            <span>Your Real First Name<input type="text" placeholder="e.g. Nancy" ref="newRealName" class="nicknameinput"></span>
+          </div>
+          <div class="marginTop">
+            <span>Create Password<input type="text" placeholder="e.g. 123456" ref="newPassword" class="nicknameinput"></span>
+          </div>
+          <ion-icon name="arrow-round-forward" onclick={ creatNewUser } class="icon"></ion-icon>
+        </div>
+          <!-- This is the password -->
+        <div class="logininfo" if={ userLogged }>
+          <span>Password:<input type="text" value="" ref="password" class="nicknameinput"></span>
+          <br><ion-icon name="arrow-round-forward" onclick={ pastUserlogin } class="icon"></ion-icon>
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +51,6 @@
     <post if={ posting } class="animated fadeInUp"></post>
 
     <button type="button" class="center composebtn" onclick={ compose }> Compose </button>
-
   </div>
 
 
@@ -61,27 +79,51 @@
         that.messagesTotalList.push(data[message])
       };
       that.messagesList = that.messagesTotalList;
-      console.log(that.messagesList);
     });
 
-    // this.googleauth = function() {
-    //   var provider = new firebase.auth.GoogleAuthProvider();
-    //   firebase.auth().signInWithPopup(provider).catch(function(err){
-    //     console.log(error);
-    //   });
-    // }
+    var usersInfo = database.ref("usersInfo");
+    usersInfo.on('value', function(snap) {
+      var data = snap.val();
+      that.usersList = [];
+      for (user in data) {
+        that.usersList.push(data[user])
+      };
+    });
 
-    //Login Page
-    this.login = function(e) {
+    //Login First
+    this.loginFakeName = function(e) {
       if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
         if (this.refs.nickname.value == "") {
           alert("Please type in the nickname");
           return false;
         }
-        this.user = this.refs.nickname.value;
-        this.loggedin = true;
+        that.user = this.refs.nickname.value;
+        that.userLogged = this.usersList.filter(obj => obj.fakeName === that.user);
+        if (that.userLogged == "") {
+          that.userLogged = false;
+        } else {
+          console.log(that.userLogged[0].password);
+        };
+
       }
     };
+
+    //Creat New user
+    this.creatNewUser = function(e) {
+      var newRealName = this.refs.newRealName.value;
+      var newPassword = this.refs.newPassword.value;
+      var newUser = {
+        fakeName: this.user,
+        realname: newRealName,
+        password: newPassword
+      };
+      database.ref("usersInfo/" + this.user).set(newUser);
+      this.loggedin = true;
+    };
+
+    //Past User Login
+
+
 
     //Log out
     this.logout = function() {
@@ -91,7 +133,7 @@
       alert("You have logged out successfully!");
     };
 
-    // Filter Messages
+    //Filter Messages
     this.tagfilter = function() {
       var topic = that.refs.filtertag.value;
       if (topic !== "") {
@@ -133,6 +175,10 @@
     .loginwelcome {
       text-align:center;
       padding-top: 300px;
+    }
+
+    .marginTop {
+      margin-top: 5px;
     }
 
     h1 {
@@ -195,7 +241,7 @@
 
     .loginpage {
       background-color: #8DC8E8;
-      margin: 0 0 0 0;
+      margin-top: 5px;
       padding-bottom:350px;
      }
 
