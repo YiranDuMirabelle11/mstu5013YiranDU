@@ -5,11 +5,11 @@
     <div class="loginwelcome">
       <h1>Hello!</h1>
       <div class="logininfo" if={ !user }>
-        <span> Log in as <input type="text" placeholder="nickname: e.g.apple" ref="nickname" class="nicknameinput" onkeypress={ login }></span>
+        <span> Log in as <input type="text" placeholder="nickname: e.g.apple" ref="nickname" class="nicknameinput" onkeypress={ loginFakeName }></span>
         <br><ion-icon name="arrow-round-forward" onclick={ loginFakeName } class="icon"></ion-icon>
       </div>
     <!-- This is the second login -->
-      <div if={ user }>
+      <div if={ user } class="animated fadeInLeft">
         <!-- This is the realname -->
         <div class="logininfo" if={ !userLogged }>
           <div class="marginTop">
@@ -22,7 +22,7 @@
         </div>
           <!-- This is the password -->
         <div class="logininfo" if={ userLogged }>
-          <span>Password:<input type="text" value="" ref="password" class="nicknameinput"></span>
+          <span>Password:<input type="text" ref="password" class="nicknameinput"></span>
           <br><ion-icon name="arrow-round-forward" onclick={ pastUserlogin } class="icon"></ion-icon>
         </div>
       </div>
@@ -104,25 +104,44 @@
         } else {
           console.log(that.userLogged[0].password);
         };
-
-      }
+      };
     };
 
     //Creat New user
     this.creatNewUser = function(e) {
-      var newRealName = this.refs.newRealName.value;
-      var newPassword = this.refs.newPassword.value;
-      var newUser = {
-        fakeName: this.user,
-        realname: newRealName,
-        password: newPassword
+      if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+        if (this.refs.newRealName.value == "") {
+          alert("Please type in your FIRST NAME");
+          return false;
+        };
+        if (this.refs.newPassword.value == "") {
+          alert("Please type in the PASSWORD");
+          return false;
+        };
+        var newRealName = this.refs.newRealName.value;
+        var newPassword = this.refs.newPassword.value;
+        var newUser = {
+          fakeName: this.user,
+          realname: newRealName,
+          password: newPassword
+        };
+        database.ref("usersInfo/" + this.user).set(newUser);
+        this.loggedin = true;
       };
-      database.ref("usersInfo/" + this.user).set(newUser);
-      this.loggedin = true;
     };
 
     //Past User Login
-
+    this.pastUserlogin = function() {
+      if ((event.type === "keypress" && event.which === 13) || event.type === "click") {
+        var truePassword = that.userLogged[0].password;
+        var password = this.refs.password.value;
+        if (truePassword == password) {
+          this.loggedin = true;
+        } else {
+          alert("Please try again");
+        };
+      };
+    };
 
 
     //Log out
@@ -162,6 +181,7 @@
       that.posting = false;
       that.update();
     };
+
   </script>
 
 
@@ -255,8 +275,5 @@
      }
 
   </style>
-
-
-
 
 </app>
