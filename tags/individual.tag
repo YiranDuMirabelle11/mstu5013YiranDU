@@ -22,16 +22,9 @@
 
   <script>
     var that = this;
+
     this.user = this.opts.user;
-      var messagesOfTargetUserRef = database.ref("messagesByUser/"+this.user);
-     // messagesOfTargetUserRef.orderByChild('tag').equalTo('academic').once('value', function(snap) {
-     //                    var data = snap.val();
-     //                    this.numOfAcademic Object.keys(data).length;
-     //                  });
-     // messagesOfTargetUserRef.orderByChild('tag').equalTo('activity').once('value', function(snap) {
-     //                    var data = snap.val();
-     //                    this.numOfActivity = Object.keys(data).length;
-     //                  });
+    var messagesOfTargetUserRef = database.ref("messagesByUser/"+this.user);
 
     this.guess = function() {
       var userfakename = this.user;
@@ -43,33 +36,31 @@
     this.on('update', function() {
       console.log("graphs");
       var ctx = this.refs.myPieChart;
-      messagesOfTargetUserRef.orderByChild('tag').equalTo('funpost').on('value', function(snap){
-        var data = snap.val();
-        that.numOfFunpost = Object.keys(data).length;
-        });
-      messagesOfTargetUserRef.orderByChild('tag').equalTo('academic').on('value', function(snap){
-        var data = snap.val();
-        that.numOfAcademic = Object.keys(data).length;
-        });
-      messagesOfTargetUserRef.orderByChild('tag').equalTo('activity').on('value', function(snap){
-        var data = snap.val();
-        console.log("here");
-        that.numOfActivity = Object.keys(data).length;
-        });
-      if (that.numOfAcademic == "") {
+      console.log(that.currentUserMessages);
+      var numOfAcademic = that.currentUserMessages.filter(function(message) {
+        return message.tag == "academic";
+      }).length;
+      var numOfFunpost = that.currentUserMessages.filter(function(message) {
+        return message.tag == "funpost";
+      }).length;
+      var numOfActivity = that.currentUserMessages.filter(function(message) {
+        return message.tag == "activity";
+      }).length;
+
+      if (numOfAcademic == "") {
         that.numOfAcademic == 0;
       };
-      if (that.numOfFunpost == "") {
+      if (numOfFunpost == "") {
         that.numOfFunpost == 0;
       };
-      if (that.numOfActivity == "") {
+      if (numOfActivity == "") {
         that.numOfActivity == 0;
       };
       console.log("there");
-      var userdata = [ that.numOfAcademic, that.numOfFunpost, that.numOfActivity];
-      var acaindex = that.numOfAcademic/(that.numOfAcademic+ that.numOfFunpost+that.numOfActivity)
-      var funindex = that.numOfFunpost/(that.numOfAcademic+ that.numOfFunpost+that.numOfActivity)
-      var acadeindex = that.numOfActivity/(that.numOfAcademic+ that.numOfFunpost+that.numOfActivity)
+      var userdata = [ numOfAcademic, numOfFunpost, numOfActivity];
+      var acaindex = numOfAcademic/(numOfAcademic+ numOfFunpost+numOfActivity)
+      var funindex = numOfFunpost/(numOfAcademic+ numOfFunpost+numOfActivity)
+      var acadeindex = numOfActivity/(numOfAcademic+ numOfFunpost+numOfActivity)
       console.log(acaindex, funindex, acadeindex);
       var myPieChart = new Chart(ctx,{
           type: 'doughnut',
@@ -109,7 +100,6 @@
         for (message in data) {
           that.currentUserMessages.push(data[message])
         };
-        console.log(that.currentUserMessages);
         that.update();
       });
 

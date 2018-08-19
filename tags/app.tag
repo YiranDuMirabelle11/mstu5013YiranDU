@@ -62,7 +62,6 @@
       };
       that.messagesList = that.messagesTotalList;
       console.log(that.messagesList);
-      that.update();
     });
 
     // this.googleauth = function() {
