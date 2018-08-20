@@ -15,6 +15,8 @@
     <div class="mainpage">
       <span class="" onclick={ mainpage }>Main Page</span>
     </div>
+
+    <guess if={ guessing } current-user={ user } class ="animated fadeInUp"></guess>
   </div>
 
 
@@ -24,15 +26,20 @@
     var that = this;
 
     this.user = this.opts.user;
+    this.guessing = false;
     var messagesOfTargetUserRef = database.ref("messagesByUser/"+this.user);
 
-    this.guess = function() {
-      var userfakename = this.user;
-      observable.trigger('guessactive', userfakename);
-      this.parent.guessing = true;
-      this.parent.update();
-    };
+    //Firebase Setup
+    messagesOfTargetUserRef.on('value', function(snap) {
+      var data = snap.val();
+      that.currentUserMessages = [];
+      for (message in data) {
+        that.currentUserMessages.push(data[message])
+      };
+      that.update();
+    });
 
+    //   Chart Setup
     this.on('update', function() {
       console.log("graphs");
       var ctx = this.refs.myPieChart;
@@ -85,23 +92,22 @@
                 // These labels appear in the legend and in the tooltips when hovering different arcs
           options: {}
         });
+
       });
 
+    // Guess Function
+    this.guess = function() {
+      this.guessing = true;
+    };
 
-      this.mainpage = function() {
-        console.log("Go back to the main page");
-        this.parent.digging = false;
-        this.parent.update();
-      };
+    // Get Back to the Main Page
+    this.mainpage = function() {
+      console.log("Go back to the main page");
+      this.parent.digging = false;
+      this.parent.update();
+    };
 
-      messagesOfTargetUserRef.on('value', function(snap) {
-        var data = snap.val();
-        that.currentUserMessages = [];
-        for (message in data) {
-          that.currentUserMessages.push(data[message])
-        };
-        that.update();
-      });
+
 
 
     console.log(this.opts.user);

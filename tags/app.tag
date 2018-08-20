@@ -16,13 +16,13 @@
             <span>Your Real First Name<input type="text" placeholder="e.g. Nancy" ref="newRealName" class="nicknameinput"></span>
           </div>
           <div class="marginTop">
-            <span>Create Password<input type="text" placeholder="e.g. 123456" ref="newPassword" class="nicknameinput"></span>
+            <span>Create Password<input type="text" placeholder="e.g. 123456" ref="newPassword" class="nicknameinput" onkeypress={ creatNewUser }></span>
           </div>
           <ion-icon name="arrow-round-forward" onclick={ creatNewUser } class="icon"></ion-icon>
         </div>
           <!-- This is the password -->
         <div class="logininfo" if={ userLogged }>
-          <span>Password:<input type="text" ref="password" class="nicknameinput"></span>
+          <span>Password:<input type="text" ref="password" class="nicknameinput" onkeypress={ pastUserlogin }></span>
           <br><ion-icon name="arrow-round-forward" onclick={ pastUserlogin } class="icon"></ion-icon>
         </div>
       </div>
@@ -55,23 +55,19 @@
 
 
   <individual if={ digging } user={ diguser }></individual>
-  <guess show={ guessing } class ="animated fadeInUp"></guess>
-
   <script>
     var that = this;
 
     // Initualize
     this.loggedin = false;
     this.user = null;
-    this.guessing = false;
     this.posting = false;
     this.digging = false;
     this.diguser = "";
     this.messagesList = [];
 
-    // Firebase setup
+    // Firebase Messages Setup
     var messagesRef = database.ref("messages");
-
     messagesRef.on('value', function(snap) {
       var data = snap.val();
       that.messagesTotalList = [];
@@ -81,6 +77,7 @@
       that.messagesList = that.messagesTotalList;
     });
 
+    // Firebase UserSetup
     var usersInfo = database.ref("usersInfo");
     usersInfo.on('value', function(snap) {
       var data = snap.val();

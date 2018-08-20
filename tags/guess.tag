@@ -17,7 +17,17 @@
 
   <script>
    var that= this;
-   this.fakename = "Who";
+
+   console.log("guess");
+   this.fakename = this.opts.currentUser;
+   var currentUserRef = database.ref("usersInfo/" + this.fakename);
+
+
+   //Firebase
+   currentUserRef.on('value', function(snap){
+     var data = snap.val();
+     that.trueanswer = data.realName;
+   });
 
    this.close = function() {
      this.parent.guessing =false;
@@ -27,12 +37,14 @@
 
    this.submit = function() {
      console.log("Check for answer!");
-   }
-
-   observable.on('guessactive', function(userfakename) {
-     that.fakename = userfakename;
-     that.update();
-   });
+     var guessName = this.refs.guess.value;
+     console.log(guessName, this.trueanswer);
+     if (guessName == this.trueanswer) {
+       alert("You get your classmate right!");
+     } else {
+       alert("Try Again");
+     };
+   };
 
 
 

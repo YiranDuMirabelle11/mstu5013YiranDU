@@ -29,6 +29,7 @@
  <script>
   var that = this;
   this.editing = false;
+  console.log(this.user);
   this.on('update', function() {
     if (this.parent.user === this.user) {
         that.owner = true;
